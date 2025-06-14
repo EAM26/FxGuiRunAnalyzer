@@ -4,5 +4,6 @@ module org.eamcode.fxguirunanalyzer {
 
 
     opens org.eamcode.fxguirunanalyzer to javafx.fxml;
+    opens org.eamcode.fxguirunanalyzer.controller to javafx.fxml;
     exports org.eamcode.fxguirunanalyzer;
 }
