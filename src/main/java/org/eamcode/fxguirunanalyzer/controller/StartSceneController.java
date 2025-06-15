@@ -1,14 +1,11 @@
 package org.eamcode.fxguirunanalyzer.controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
-import org.eamcode.fxguirunanalyzer.service.StartSceneService;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
-import java.util.List;
+import javafx.scene.control.TableColumn;
+import org.eamcode.fxguirunanalyzer.service.StartSceneService;
 
 public class StartSceneController {
 

@@ -14,7 +14,6 @@ public class StartSceneService {
     }
 
     public List<ReportResponse> getAllReports() {
-//        return ...... todo make request to localhost 8080 en api/reports
         return request.getAllReports();
     }
 }

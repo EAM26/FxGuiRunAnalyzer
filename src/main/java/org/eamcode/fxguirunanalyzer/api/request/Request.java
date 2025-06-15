@@ -18,7 +18,8 @@ public class Request {
 
     public static final ObjectMapper MAPPER = new ObjectMapper()
             .registerModule(new JavaTimeModule())
-            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);;
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final String protocol;
     private final String host;
@@ -39,7 +40,7 @@ public class Request {
     }
 
     public String getBaseUrl() {
-        return protocol + "://" + host + ":"  + port;
+        return protocol + "://" + host + ":" + port;
     }
 
 
@@ -54,13 +55,13 @@ public class Request {
                     .uri(URI.create(url))
                     .build();
 
-            HttpResponse <String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            if(response.statusCode() != 200) {
-                throw new IllegalStateException("status"+ response.statusCode());
+            if (response.statusCode() != 200) {
+                throw new IllegalStateException("status" + response.statusCode());
             }
 
-            return  MAPPER.readValue(response.body(), new TypeReference<List<ReportResponse>>() {
+            return MAPPER.readValue(response.body(), new TypeReference<List<ReportResponse>>() {
             });
 
         } catch (Exception e) {
