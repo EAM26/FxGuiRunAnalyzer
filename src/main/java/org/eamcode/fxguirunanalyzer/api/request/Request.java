@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import jdk.jfr.DataAmount;
 import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
+import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -44,11 +44,11 @@ public class Request {
     }
 
 
-    public List<ReportResponse> getAllReports() {
-        return sendRequest(getBaseUrl() + "/api/reports");
+    public List<ReportSummaryResponse> getAllSummaryReports() {
+        return sendRequest(getBaseUrl() + "/api/reports/summary");
     }
 
-    private List<ReportResponse> sendRequest(String url) {
+    private List<ReportSummaryResponse> sendRequest(String url) {
 
         try {
             HttpRequest httpRequest = HttpRequest.newBuilder()
@@ -61,7 +61,7 @@ public class Request {
                 throw new IllegalStateException("status" + response.statusCode());
             }
 
-            return MAPPER.readValue(response.body(), new TypeReference<List<ReportResponse>>() {
+            return MAPPER.readValue(response.body(), new TypeReference<>() {
             });
 
         } catch (Exception e) {

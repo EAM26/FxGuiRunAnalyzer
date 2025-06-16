@@ -34,6 +34,6 @@ public class StartSceneController {
 
     @FXML
     void onButtonClick(ActionEvent event) {
-        labelHeader.setText(startSceneService.getAllReports().getFirst().getName());
+        labelHeader.setText(startSceneService.getAllSummaryReports().getFirst().getName());
     }
 }
