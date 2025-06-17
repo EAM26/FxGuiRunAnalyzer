@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
 import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
 
 import java.net.URI;
