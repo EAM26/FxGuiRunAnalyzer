@@ -1,6 +1,5 @@
 package org.eamcode.fxguirunanalyzer.service;
 
-import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
 import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
 import org.eamcode.fxguirunanalyzer.api.request.Request;
 
