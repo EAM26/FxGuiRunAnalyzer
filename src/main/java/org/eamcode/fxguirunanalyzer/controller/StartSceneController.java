@@ -25,13 +25,17 @@ public class StartSceneController implements Initializable {
 
     private final StartSceneService startSceneService;
 
+
     public StartSceneController() {this.startSceneService = new StartSceneService();}
 
     @FXML
     public TableView<ReportSummaryResponse> startSceneTable;
 
     @FXML
-    private Button btnClickMe;
+    private Button btnOpen;
+
+    @FXML
+    public Button btnNew;
 
     @FXML
     private Label labelHeader;
@@ -56,8 +60,13 @@ public class StartSceneController implements Initializable {
     }
 
     @FXML
-    void onButtonClick(ActionEvent event) {
+    void onButtonOpenClick(ActionEvent event) {
         labelHeader.setText(startSceneService.getAllSummaryReports().getFirst().getName());
+    }
+
+    @FXML
+    public void onButtonNewClick(ActionEvent actionEvent) {
+        System.out.println("new button clicked.");
     }
 
     @FXML
@@ -69,6 +78,4 @@ public class StartSceneController implements Initializable {
         stage.setTitle("Start Screen");
         stage.setScene(scene);
     }
-
-
 }
