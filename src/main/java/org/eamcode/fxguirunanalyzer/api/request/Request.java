@@ -4,12 +4,15 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
 import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 
@@ -44,10 +47,7 @@ public class Request {
 
 
     public List<ReportSummaryResponse> getAllSummaryReports() {
-        return sendRequest(getBaseUrl() + "/api/reports/summary");
-    }
-
-    private List<ReportSummaryResponse> sendRequest(String url) {
+        String url = getBaseUrl() + "/api/reports/summary";
 
         try {
             HttpRequest httpRequest = HttpRequest.newBuilder()

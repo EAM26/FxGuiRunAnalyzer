@@ -1,23 +1,37 @@
 package org.eamcode.fxguirunanalyzer.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import lombok.Data;
+import org.eamcode.fxguirunanalyzer.Main;
+import org.eamcode.fxguirunanalyzer.util.Navigation;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
 
 @Data
-public class ReportSceneController implements Initializable {
-
-    private Long reportId;
+public class ReportSceneController {
 
     @FXML
-    public Label testLabel;
+    public Label labelReportId;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        testLabel.setText(String.valueOf(reportId));
+    @FXML
+    public Button btnStart;
+
+    public void initData(Long id) {
+        labelReportId.setText(id.toString());
     }
+
+    @FXML
+    private void onBtnStartClick(ActionEvent event) throws IOException {
+        Stage stage = (Stage)  btnStart.getScene().getWindow();
+        Navigation nav = new Navigation();
+        nav.toStartScene(stage);
+
+
+    }
+
+
 }

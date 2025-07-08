@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eamcode.fxguirunanalyzer.controller.StartSceneController">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eamcode.fxguirunanalyzer.controller.StartSceneController">
    <children>
       <Label fx:id="labelHeader" layoutX="219.0" layoutY="27.0" text="Reports">
          <font>
@@ -21,6 +21,7 @@
             <TableColumn fx:id="distanceCol" prefWidth="81.33331298828125" text="Distance" />
         </columns>
       </TableView>
-      <Button fx:id="btnClickMe" layoutX="274.0" layoutY="407.0" mnemonicParsing="false" onAction="#onButtonClick" text="Click Me" />
+      <Button fx:id="btnOpen" layoutX="149.0" layoutY="376.0" mnemonicParsing="false" onAction="#onButtonOpenClick" text="Open" />
+      <Button fx:id="btnNew" layoutX="286.0" layoutY="376.0" mnemonicParsing="false" onAction="#onButtonNewClick" text="New+" />
    </children>
 </AnchorPane>
