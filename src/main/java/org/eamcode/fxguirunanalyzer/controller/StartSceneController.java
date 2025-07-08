@@ -12,11 +12,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
 import org.eamcode.fxguirunanalyzer.service.StartSceneService;
 import org.eamcode.fxguirunanalyzer.util.Navigation;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -78,13 +80,19 @@ public class StartSceneController implements Initializable {
 
     @FXML
     public void onButtonNewClick(ActionEvent actionEvent) throws IOException {
-
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Report File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files", "*.CSV", "*.csv"));
+        File file = fileChooser.showOpenDialog(btnNew.getScene().getWindow());
+        if(file == null) {
+            return;
+        }
+        String absPath = file.getAbsolutePath();
+        System.out.println("absPath: " + absPath);
 
     }
 
     private void toReportScene(ActionEvent actionEvent) throws IOException {
-
-
 
 
     }
