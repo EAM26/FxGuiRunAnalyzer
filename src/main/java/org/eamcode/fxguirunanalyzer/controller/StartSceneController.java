@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,7 +27,9 @@ public class StartSceneController implements Initializable {
     private final StartSceneService startSceneService;
 
 
-    public StartSceneController() {this.startSceneService = new StartSceneService();}
+    public StartSceneController() {
+        this.startSceneService = new StartSceneService();
+    }
 
     @FXML
     public TableView<ReportSummaryResponse> startSceneTable;
@@ -60,22 +63,43 @@ public class StartSceneController implements Initializable {
     }
 
     @FXML
-    void onButtonOpenClick(ActionEvent event) {
-        labelHeader.setText(startSceneService.getAllSummaryReports().getFirst().getName());
+    void onButtonOpenClick(ActionEvent event) throws IOException {
+        toReportScene(event);
+//        labelHeader.setText(startSceneService.getAllSummaryReports().getFirst().getName());
+
     }
 
     @FXML
     public void onButtonNewClick(ActionEvent actionEvent) {
         System.out.println("new button clicked.");
+
     }
 
-    @FXML
-    public void toReportScene(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/fxml/start-scene.fxml"));
-        ReportSceneController reportSceneController = new ReportSceneController();
-        reportSceneController.setReportId(1L);
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Start Screen");
-        stage.setScene(scene);
+    private void toReportScene(ActionEvent actionEvent) throws IOException {
+        ReportSummaryResponse selectedReport = startSceneTable.getSelectionModel().getSelectedItem();
+        if (selectedReport == null) {
+            System.out.println("No report selected.");
+            return;
+        }
+
+        FXMLLoader loader =  new FXMLLoader(getClass().getResource("/fxml/report-scene.fxml")) ;
+        Parent root = loader.load();
+        ReportSceneController controller = loader.getController();
+        controller.initData(selectedReport.getId());
+
+        Stage stage = (Stage) startSceneTable.getScene().getWindow();
+        stage.setScene(new Scene(root));
+
     }
+
+
+//    @FXML
+//    public void toReportScene(Stage stage) throws IOException {
+//        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/fxml/start-scene.fxml"));
+//        ReportSceneController reportSceneController = new ReportSceneController();
+//        reportSceneController.setReportId(1L);
+//        Scene scene = new Scene(fxmlLoader.load());
+//        stage.setTitle("Start Screen");
+//        stage.setScene(scene);
+//    }
 }

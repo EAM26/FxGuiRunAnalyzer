@@ -9,15 +9,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Data
-public class ReportSceneController implements Initializable {
-
-    private Long reportId;
+public class ReportSceneController {
 
     @FXML
-    public Label testLabel;
+    public Label labelReportId;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        testLabel.setText(String.valueOf(reportId));
+    public void initData(Long id) {
+        labelReportId.setText(id.toString());
     }
+
+
 }
