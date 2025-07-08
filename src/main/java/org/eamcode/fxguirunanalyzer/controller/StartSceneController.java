@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
 import org.eamcode.fxguirunanalyzer.service.StartSceneService;
+import org.eamcode.fxguirunanalyzer.util.Navigation;
 
 import java.io.IOException;
 import java.net.URL;
@@ -63,31 +64,28 @@ public class StartSceneController implements Initializable {
 
     @FXML
     void onButtonOpenClick(ActionEvent event) throws IOException {
-        toReportScene(event);
-//        labelHeader.setText(startSceneService.getAllSummaryReports().getFirst().getName());
-
-    }
-
-    @FXML
-    public void onButtonNewClick(ActionEvent actionEvent) {
-        System.out.println("new button clicked.");
-
-    }
-
-    private void toReportScene(ActionEvent actionEvent) throws IOException {
         ReportSummaryResponse selectedReport = startSceneTable.getSelectionModel().getSelectedItem();
         if (selectedReport == null) {
             System.out.println("No report selected.");
             return;
         }
-
-        FXMLLoader loader =  new FXMLLoader(getClass().getResource("/fxml/report-scene.fxml")) ;
-        Parent root = loader.load();
-        ReportSceneController controller = loader.getController();
-        controller.initData(selectedReport.getId());
-
         Stage stage = (Stage) startSceneTable.getScene().getWindow();
-        stage.setScene(new Scene(root));
+        Navigation nav = new Navigation();
+        nav.toReportScene(stage, selectedReport.getId());
+//        labelHeader.setText(startSceneService.getAllSummaryReports().getFirst().getName());
+
+    }
+
+    @FXML
+    public void onButtonNewClick(ActionEvent actionEvent) throws IOException {
+
+
+    }
+
+    private void toReportScene(ActionEvent actionEvent) throws IOException {
+
+
+
 
     }
 

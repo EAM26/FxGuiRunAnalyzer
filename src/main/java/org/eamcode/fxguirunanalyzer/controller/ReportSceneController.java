@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import lombok.Data;
 import org.eamcode.fxguirunanalyzer.Main;
+import org.eamcode.fxguirunanalyzer.util.Navigation;
 
 import java.io.IOException;
 
@@ -26,7 +27,10 @@ public class ReportSceneController {
     @FXML
     private void onBtnStartClick(ActionEvent event) throws IOException {
         Stage stage = (Stage)  btnStart.getScene().getWindow();
-        Main.toStartScene(stage);
+        Navigation nav = new Navigation();
+        nav.toStartScene(stage);
+
+
     }
 
 
