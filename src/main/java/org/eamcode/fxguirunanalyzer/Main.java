@@ -14,7 +14,7 @@ public class Main extends Application {
 
     }
 
-    public void toStartScene(Stage stage) throws IOException {
+    public static void toStartScene(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/fxml/start-scene.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Start Screen");
