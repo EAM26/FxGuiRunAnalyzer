@@ -46,6 +46,29 @@ public class Request {
     }
 
 
+    public ReportResponse createReportResponse(String absPath) {
+        String encoded = URLEncoder.encode(absPath, StandardCharsets.UTF_8);
+        String url      = getBaseUrl() + "/api/reports?path=" + encoded;
+
+        try {
+            HttpRequest httpRequest = HttpRequest.newBuilder()
+                    .uri(URI.create(url))                 // …/api/reports?path=…
+                    .POST(HttpRequest.BodyPublishers.noBody())   //  ← POST!
+                    .build();
+            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() != 200) {
+                throw new IllegalStateException("status" + response.statusCode());
+            }
+
+            return MAPPER.readValue(response.body(), new TypeReference<>() {
+            });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public List<ReportSummaryResponse> getAllSummaryReports() {
         String url = getBaseUrl() + "/api/reports/summary";
 
