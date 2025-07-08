@@ -3,10 +3,7 @@ package org.eamcode.fxguirunanalyzer.controller;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -14,7 +11,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
 import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
+import org.eamcode.fxguirunanalyzer.service.ReportSceneService;
 import org.eamcode.fxguirunanalyzer.service.StartSceneService;
 import org.eamcode.fxguirunanalyzer.util.Navigation;
 
@@ -27,10 +26,12 @@ import java.util.ResourceBundle;
 public class StartSceneController implements Initializable {
 
     private final StartSceneService startSceneService;
+    private final ReportSceneService reportSceneService;
 
 
     public StartSceneController() {
         this.startSceneService = new StartSceneService();
+        this.reportSceneService = new ReportSceneService();
     }
 
     @FXML
@@ -81,30 +82,25 @@ public class StartSceneController implements Initializable {
     @FXML
     public void onButtonNewClick(ActionEvent actionEvent) throws IOException {
         FileChooser fileChooser = new FileChooser();
+
+        File backendDir = new File(System.getProperty("backend.dir", "C:\\Users\\Gebruiker\\Projects\\JavaProjects\\RunAnalyzer\\src\\main\\resources\\test-data"));
+        if(backendDir.exists()){
+            fileChooser.setInitialDirectory(backendDir);
+        }
+
         fileChooser.setTitle("Select Report File");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files", "*.CSV", "*.csv"));
+
         File file = fileChooser.showOpenDialog(btnNew.getScene().getWindow());
         if(file == null) {
             return;
         }
         String absPath = file.getAbsolutePath();
-        System.out.println("absPath: " + absPath);
+        ReportResponse response = reportSceneService.createReport(absPath);
 
+        Stage stage = (Stage) startSceneTable.getScene().getWindow();
+        Navigation nav = new Navigation();
+        nav.toReportScene(stage, response.getId());
     }
 
-    private void toReportScene(ActionEvent actionEvent) throws IOException {
-
-
-    }
-
-
-//    @FXML
-//    public void toReportScene(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/fxml/start-scene.fxml"));
-//        ReportSceneController reportSceneController = new ReportSceneController();
-//        reportSceneController.setReportId(1L);
-//        Scene scene = new Scene(fxmlLoader.load());
-//        stage.setTitle("Start Screen");
-//        stage.setScene(scene);
-//    }
 }
