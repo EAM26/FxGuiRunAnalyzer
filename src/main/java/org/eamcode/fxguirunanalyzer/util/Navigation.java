@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.eamcode.fxguirunanalyzer.Main;
+import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
 import org.eamcode.fxguirunanalyzer.controller.ReportSceneController;
 
 import java.io.IOException;
@@ -19,12 +20,12 @@ public class Navigation {
         stage.show();
     }
 
-    public void toReportScene(Stage stage, Long id) throws IOException {
-
+    public void toReportScene(Stage stage, ReportResponse response) throws IOException {
         FXMLLoader loader =  new FXMLLoader(getClass().getResource("/fxml/report-scene.fxml")) ;
         Parent root = loader.load();
         ReportSceneController controller = loader.getController();
-        controller.initData(id);
+        controller.initData(response);
+        stage.setTitle("Report Details");
         stage.setScene(new Scene(root));
     }
 }

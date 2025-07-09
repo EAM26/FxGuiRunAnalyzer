@@ -1,5 +1,6 @@
 package org.eamcode.fxguirunanalyzer.api.request;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -7,6 +8,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
 import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -52,8 +54,8 @@ public class Request {
 
         try {
             HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(URI.create(url))                 // …/api/reports?path=…
-                    .POST(HttpRequest.BodyPublishers.noBody())   //  ← POST!
+                    .uri(URI.create(url))
+                    .POST(HttpRequest.BodyPublishers.noBody())
                     .build();
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
@@ -68,26 +70,35 @@ public class Request {
         }
     }
 
-
-    public List<ReportSummaryResponse> getAllSummaryReports() {
-        String url = getBaseUrl() + "/api/reports/summary";
-
-        try {
+    private HttpResponse<String> getReport(String url) throws IOException, InterruptedException {
             HttpRequest httpRequest = HttpRequest.newBuilder()
                     .uri(URI.create(url))
                     .build();
 
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() != 200) {
+            if (response.statusCode() < 200 || response.statusCode() >= 300) {
                 throw new IllegalStateException("status" + response.statusCode());
             }
+            return response;
 
+
+    }
+
+
+    public List<ReportSummaryResponse> getAllSummaryReports() throws IOException, InterruptedException {
+        String url = getBaseUrl() + "/api/reports/summary";
+            HttpResponse<String> response = getReport(url);
             return MAPPER.readValue(response.body(), new TypeReference<>() {
             });
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
+
+    public ReportResponse getSingleReportResponse(Long id) throws IOException, InterruptedException {
+        String url = getBaseUrl() + "/api/reports/" + id;
+        HttpResponse<String> response = getReport(url);
+        return MAPPER.readValue(response.body(), new TypeReference<>() {
+
+        });
+    }
+
 }
