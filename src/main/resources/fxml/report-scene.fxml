@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eamcode.fxguirunanalyzer.controller.ReportSceneController">
+<AnchorPane prefHeight="400.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eamcode.fxguirunanalyzer.controller.ReportSceneController">
    <children>
       <Label fx:id="lblTraining" layoutX="38.0" layoutY="24.0" prefHeight="17.0" prefWidth="55.0" text="Training:" />
       <Label fx:id="labelName" layoutX="88.0" layoutY="23.0" text="label name training">
@@ -25,23 +25,23 @@
       <Label layoutX="216.0" layoutY="74.0" text="Heartrate" />
       <TextField fx:id="tfSpeed" layoutX="300.0" layoutY="96.0" prefHeight="25.0" prefWidth="50.0" />
       <Label layoutX="299.0" layoutY="74.0" text="Speed km/h" />
-      <TableView layoutX="42.0" layoutY="174.0" prefHeight="200.0" prefWidth="289.0">
+      <TableView fx:id="phaseTable" layoutX="48.0" layoutY="174.0" prefHeight="200.0" prefWidth="385.0">
         <columns>
-          <TableColumn prefWidth="32.6666259765625" text="nr." />
-          <TableColumn prefWidth="51.333343505859375" text="type" />
-            <TableColumn prefWidth="51.33331298828125" text="duration" />
-            <TableColumn prefWidth="54.00006103515625" text="distance" />
-            <TableColumn prefWidth="26.0" text="hr" />
-            <TableColumn prefWidth="71.33333333333331" text="speed" />
+          <TableColumn fx:id="nrCol" prefWidth="32.6666259765625" text="nr." />
+          <TableColumn fx:id="categoryCol" prefWidth="88.0" text="type" />
+            <TableColumn fx:id="durationCol" prefWidth="62.0" text="duration" />
+            <TableColumn fx:id="distanceCol" prefWidth="71.0" text="distance" />
+            <TableColumn fx:id="hrCol" prefWidth="68.0" text="hr" />
+            <TableColumn fx:id="speedCol" prefWidth="62.0" text="speed" />
         </columns>
       </TableView>
       <Label fx:id="tableName1" layoutX="165.0" layoutY="139.0" text="Phases" />
-      <TableView layoutX="353.0" layoutY="174.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView layoutX="511.0" layoutY="174.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn prefWidth="66.0" text="type" />
           <TableColumn prefWidth="84.66668701171875" text="C2" />
         </columns>
       </TableView>
-      <Label fx:id="tableName2" layoutX="442.0" layoutY="117.0" text="Summary" />
+      <Label fx:id="tableName2" layoutX="441.0" layoutY="139.0" text="Summary" />
    </children>
 </AnchorPane>
