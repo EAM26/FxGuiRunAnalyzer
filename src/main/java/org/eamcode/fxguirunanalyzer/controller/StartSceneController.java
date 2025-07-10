@@ -57,26 +57,35 @@ public class StartSceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setStartTable();
+    }
+
+    public void setStartTable(){
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         durationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
         distanceCol.setCellValueFactory(new PropertyValueFactory<>("distance"));
 
-        List<ReportSummaryResponse> responseList = startSceneService.getAllSummaryReports();
+        List<ReportSummaryResponse> responseList;
+        try {
+            responseList = startSceneService.getAllSummaryReports();
+        } catch (IOException | InterruptedException e) {
+            System.err.println("Error fetching reports: " + e);
+            responseList = List.of();
+        }
         startSceneTable.setItems(FXCollections.observableList(responseList));
     }
 
     @FXML
-    void onButtonOpenClick(ActionEvent event) throws IOException {
+    void onButtonOpenClick(ActionEvent event) throws IOException, InterruptedException {
         ReportSummaryResponse selectedReport = startSceneTable.getSelectionModel().getSelectedItem();
         if (selectedReport == null) {
             System.out.println("No report selected.");
             return;
         }
         Stage stage = (Stage) startSceneTable.getScene().getWindow();
+        ReportResponse reportResponse = reportSceneService.getSingleReport(selectedReport.getId());
         Navigation nav = new Navigation();
-        nav.toReportScene(stage, selectedReport.getId());
-//        labelHeader.setText(startSceneService.getAllSummaryReports().getFirst().getName());
-
+        nav.toReportScene(stage, reportResponse);
     }
 
     @FXML
@@ -100,7 +109,7 @@ public class StartSceneController implements Initializable {
 
         Stage stage = (Stage) startSceneTable.getScene().getWindow();
         Navigation nav = new Navigation();
-        nav.toReportScene(stage, response.getId());
+        nav.toReportScene(stage, response);
     }
 
 }

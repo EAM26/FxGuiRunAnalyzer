@@ -1,8 +1,11 @@
 package org.eamcode.fxguirunanalyzer.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
 import org.eamcode.fxguirunanalyzer.api.request.Request;
 import org.eamcode.fxguirunanalyzer.util.Sorter;
+
+import java.io.IOException;
 import java.util.List;
 
 public class StartSceneService {
@@ -15,11 +18,9 @@ public class StartSceneService {
         this.sorter = new Sorter();
     }
 
-    public List<ReportSummaryResponse> getAllSummaryReports() {
-
-       List<ReportSummaryResponse> responses = request.getAllSummaryReports();
-        sorter.sortLastFirst(responses);
-        return responses;
-
+    public List<ReportSummaryResponse> getAllSummaryReports() throws IOException, InterruptedException {
+            List<ReportSummaryResponse> responses = request.getAllSummaryReports();
+            sorter.sortLastFirst(responses);
+            return responses;
     }
 }
