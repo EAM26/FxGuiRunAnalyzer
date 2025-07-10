@@ -57,15 +57,20 @@ public class StartSceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setStartTable();
+    }
+
+    public void setStartTable(){
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         durationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
         distanceCol.setCellValueFactory(new PropertyValueFactory<>("distance"));
 
-        List<ReportSummaryResponse> responseList = null;
+        List<ReportSummaryResponse> responseList;
         try {
             responseList = startSceneService.getAllSummaryReports();
         } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error fetching reports: " + e);
+            responseList = List.of();
         }
         startSceneTable.setItems(FXCollections.observableList(responseList));
     }
