@@ -11,8 +11,6 @@ import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
 import org.eamcode.fxguirunanalyzer.util.Navigation;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 public class ReportSceneController {
@@ -48,6 +46,9 @@ public class ReportSceneController {
     public Label lblTraining;
 
     @FXML
+    public Button addPhaseBtn;
+
+    @FXML
     private TableColumn<PhaseResponse, Number> nrCol;
 
     @FXML
@@ -77,10 +78,18 @@ public class ReportSceneController {
     }
 
     @FXML
-    private void onBtnStartClick(ActionEvent event) throws IOException {
+    private void onBtnBackClick(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnStart.getScene().getWindow();
         Navigation nav = new Navigation();
         nav.toStartScene(stage);
+    }
+
+    @FXML
+    private void openPhaseModal(ActionEvent event) throws IOException {
+        System.out.println("Opening Phase Modal");
+        Stage stage = (Stage) addPhaseBtn.getScene().getWindow();
+        Navigation nav = new Navigation();
+        nav.openPhaseModal(stage);
     }
 
     private void setMetaData(ReportResponse response) {

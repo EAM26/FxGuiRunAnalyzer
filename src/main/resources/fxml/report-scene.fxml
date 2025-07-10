@@ -15,7 +15,7 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Button fx:id="btnStart" layoutX="526.0" layoutY="20.0" mnemonicParsing="false" onAction="#onBtnStartClick" prefHeight="25.0" prefWidth="55.0" text="Back" />
+      <Button fx:id="btnStart" layoutX="526.0" layoutY="20.0" mnemonicParsing="false" onAction="#onBtnBackClick" prefHeight="25.0" prefWidth="55.0" text="Back" />
       <TextField fx:id="tfDuration" layoutX="38.0" layoutY="96.0" prefHeight="25.0" prefWidth="69.0" />
       <Label layoutX="38.0" layoutY="74.0" text="Duration" />
       <Label layoutX="183.0" layoutY="74.0" />
@@ -25,7 +25,7 @@
       <Label layoutX="216.0" layoutY="74.0" text="Heartrate" />
       <TextField fx:id="tfSpeed" layoutX="300.0" layoutY="96.0" prefHeight="25.0" prefWidth="50.0" />
       <Label layoutX="299.0" layoutY="74.0" text="Speed km/h" />
-      <TableView fx:id="phaseTable" layoutX="48.0" layoutY="174.0" prefHeight="200.0" prefWidth="385.0">
+      <TableView fx:id="phaseTable" layoutX="38.0" layoutY="174.0" prefHeight="200.0" prefWidth="385.0">
         <columns>
           <TableColumn fx:id="nrCol" prefWidth="32.6666259765625" text="nr." />
           <TableColumn fx:id="categoryCol" prefWidth="88.0" text="type" />
@@ -43,5 +43,6 @@
         </columns>
       </TableView>
       <Label fx:id="tableName2" layoutX="441.0" layoutY="139.0" text="Summary" />
+      <Button fx:id="addPhaseBtn" layoutX="429.0" layoutY="232.0" mnemonicParsing="false" onAction="#openPhaseModal" prefHeight="25.0" prefWidth="77.0" text="add Phase" />
    </children>
 </AnchorPane>
