@@ -69,11 +69,14 @@ public class ReportSceneController {
     @FXML
     public TableView<PhaseResponse> phaseTable;
 
+    private Long reportId;
+
 
 
     public void initData(ReportResponse response) {
         setMetaData(response);
         setPhaseTable(response);
+        setReportId(response.getId());
 
     }
 
@@ -88,7 +91,7 @@ public class ReportSceneController {
     private void openPhaseDialog(ActionEvent event) throws IOException {
         Stage stage = (Stage) addPhaseBtn.getScene().getWindow();
         Navigation nav = new Navigation();
-        nav.openPhaseDialog(stage);
+        nav.openPhaseDialog(stage, reportId);
     }
 
     private void setMetaData(ReportResponse response) {
