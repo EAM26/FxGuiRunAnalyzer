@@ -12,9 +12,13 @@ import java.util.List;
 public class PhaseDialogController {
 
     private final PhaseDialogService phaseDialogService;
+    @FXML
     public Spinner<Integer> hourSpinner;
+    @FXML
     public Spinner<Integer> minuteSpinner;
+    @FXML
     public Spinner<Integer> secondSpinner;
+    @FXML
     public ComboBox<String> categoryCombo;
 
     private Long reportId;

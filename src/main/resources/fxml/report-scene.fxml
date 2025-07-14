@@ -44,5 +44,6 @@
       </TableView>
       <Label fx:id="tableName2" layoutX="441.0" layoutY="139.0" text="Summary" />
       <Button fx:id="addPhaseBtn" layoutX="429.0" layoutY="232.0" mnemonicParsing="false" onAction="#openPhaseDialog" prefHeight="25.0" prefWidth="77.0" text="add Phase" />
+      <Button fx:id="addIntervalBtn" layoutX="429.0" layoutY="274.0" mnemonicParsing="false" onAction="#openIntervalDialog" prefHeight="25.0" prefWidth="77.0" text="addInterval" />
    </children>
 </AnchorPane>

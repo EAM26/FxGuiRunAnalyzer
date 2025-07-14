@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<DialogPane prefHeight="174.0" prefWidth="492.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eamcode.fxguirunanalyzer.controller.IntervalDialogController">
+   <content>
+      <AnchorPane prefHeight="236.0" prefWidth="535.0">
+         <children>
+            <ComboBox fx:id="categoryCombo1" layoutX="37.0" layoutY="123.0" prefHeight="25.0" prefWidth="200.0" />
+            <Spinner fx:id="hourSpinner1" layoutX="37.0" layoutY="79.0" prefHeight="25.0" prefWidth="60.0" />
+            <Spinner fx:id="minuteSpinner1" layoutX="107.0" layoutY="79.0" prefHeight="25.0" prefWidth="60.0" />
+            <Spinner fx:id="secondSpinner1" layoutX="177.0" layoutY="79.0" prefHeight="25.0" prefWidth="60.0" />
+            <Label layoutX="37.0" layoutY="55.0" text="hr" />
+            <Label layoutX="107.0" layoutY="55.0" text="min" />
+            <Label layoutX="177.0" layoutY="55.0" text="sec" />
+            <ComboBox fx:id="categoryCombo2" layoutX="277.0" layoutY="125.0" prefHeight="25.0" prefWidth="200.0" />
+            <Spinner fx:id="hourSpinner2" layoutX="277.0" layoutY="81.0" prefHeight="25.0" prefWidth="60.0" />
+            <Spinner fx:id="minuteSpinner2" layoutX="347.0" layoutY="81.0" prefHeight="25.0" prefWidth="60.0" />
+            <Spinner fx:id="secondSpinner2" layoutX="417.0" layoutY="81.0" prefHeight="25.0" prefWidth="60.0" />
+            <Label layoutX="277.0" layoutY="57.0" text="hr" />
+            <Label layoutX="347.0" layoutY="57.0" text="min" />
+            <Label layoutX="417.0" layoutY="57.0" text="sec" />
+            <TextField fx:id="multiplier" layoutX="247.0" layoutY="29.0" prefHeight="25.0" prefWidth="59.0" />
+            <Label layoutX="193.0" layoutY="33.0" text="Multiplier" />
+         </children>
+      </AnchorPane>
+   </content>
+   <buttonTypes>
+      <ButtonType buttonData="OK_DONE" text="Save" />
+      <ButtonType buttonData="CANCEL_CLOSE" text="Cancel" />
+   </buttonTypes>
+</DialogPane>

@@ -49,6 +49,9 @@ public class ReportSceneController {
     public Button addPhaseBtn;
 
     @FXML
+    public Button addIntervalBtn;
+
+    @FXML
     private TableColumn<PhaseResponse, Number> nrCol;
 
     @FXML
@@ -92,6 +95,13 @@ public class ReportSceneController {
         Stage stage = (Stage) addPhaseBtn.getScene().getWindow();
         Navigation nav = new Navigation();
         nav.openPhaseDialog(stage, reportId);
+    }
+
+    @FXML
+    private void openIntervalDialog(ActionEvent event) throws IOException {
+        Stage stage = (Stage) addPhaseBtn.getScene().getWindow();
+        Navigation nav = new Navigation();
+        nav.openIntervalDialog(stage, reportId);
     }
 
     private void setMetaData(ReportResponse response) {

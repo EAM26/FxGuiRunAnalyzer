@@ -10,6 +10,7 @@ import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
 import org.eamcode.fxguirunanalyzer.Main;
 import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
+import org.eamcode.fxguirunanalyzer.controller.IntervalDialogController;
 import org.eamcode.fxguirunanalyzer.controller.PhaseDialogController;
 import org.eamcode.fxguirunanalyzer.controller.ReportSceneController;
 
@@ -55,4 +56,22 @@ public class Navigation {
         }
     }
 
+    public void openIntervalDialog(Stage stage, Long reportId) throws IOException {
+        FXMLLoader loader =
+                new FXMLLoader(Main.class.getResource("/fxml/interval-dialog.fxml"));
+        DialogPane pane = loader.load();
+        IntervalDialogController controller = loader.getController();
+        controller.initialize(reportId);
+
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane(pane);
+        dialog.initOwner(stage);
+        dialog.setTitle("Add interval");
+
+        Optional<ButtonType> pressed = dialog.showAndWait();
+        if (pressed.isPresent()
+                && pressed.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
+            controller.saveInterval();
+        }
+    }
 }
