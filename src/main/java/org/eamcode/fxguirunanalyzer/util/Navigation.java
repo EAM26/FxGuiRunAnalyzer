@@ -9,12 +9,19 @@ import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
 import org.eamcode.fxguirunanalyzer.Main;
 import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
-import org.eamcode.fxguirunanalyzer.controller.PhaseModalController;
+import org.eamcode.fxguirunanalyzer.controller.PhaseDialogController;
 import org.eamcode.fxguirunanalyzer.controller.ReportSceneController;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class Navigation {
+
+    private final PhaseDialogController phaseDialogController;
+
+    public Navigation() {
+        this.phaseDialogController = new PhaseDialogController();
+    }
 
     public  void toStartScene(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/fxml/start-scene.fxml"));
@@ -33,15 +40,22 @@ public class Navigation {
         stage.setScene(new Scene(root));
     }
 
-    public void openPhaseModal(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/phase-modal.fxml"));
+    public void openPhaseDialog(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/phase-dialog.fxml"));
         DialogPane pane = loader.load();
-        PhaseModalController modal = loader.getController();
+//        PhaseDialogController modal = loader.getController();
 
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setDialogPane(pane);
         dialog.initOwner(stage);
         dialog.setTitle("Add Phase");
-        dialog.showAndWait();
+//        dialog.showAndWait();
+        Optional<ButtonType> pressed = dialog.showAndWait();
+        if (pressed.isPresent() && pressed.get() == ButtonType.OK) {
+           phaseDialogController.savePhase();
+            System.out.println("Saving: " );
+        }
     }
+
+
 }

@@ -85,11 +85,10 @@ public class ReportSceneController {
     }
 
     @FXML
-    private void openPhaseModal(ActionEvent event) throws IOException {
-        System.out.println("Opening Phase Modal");
+    private void openPhaseDialog(ActionEvent event) throws IOException {
         Stage stage = (Stage) addPhaseBtn.getScene().getWindow();
         Navigation nav = new Navigation();
-        nav.openPhaseModal(stage);
+        nav.openPhaseDialog(stage);
     }
 
     private void setMetaData(ReportResponse response) {
@@ -101,14 +100,18 @@ public class ReportSceneController {
     }
 
     private void setPhaseTable(ReportResponse response) {
-        nrCol.setCellFactory(col -> new TableCell<>() {
-            @Override
-            protected void updateItem(Number item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty ? null : Integer.toString(getIndex() + 1));
-            }
-        });
-
+//        nrCol.setCellFactory(col -> new TableCell<>() {
+//            @Override
+//            protected void updateItem(Number item, boolean empty) {
+//                super.updateItem(item, empty);
+//                setText(empty ? null : Integer.toString(getIndex() + 1));
+//            }
+//        });
+        nrCol.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleIntegerProperty(
+                        phaseTable.getItems().indexOf(cellData.getValue()) + 1
+                )
+        );
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
         durationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
         distanceCol.setCellValueFactory(new PropertyValueFactory<>("distance"));
