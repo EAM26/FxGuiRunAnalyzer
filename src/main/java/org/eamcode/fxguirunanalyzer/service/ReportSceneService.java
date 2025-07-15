@@ -2,6 +2,7 @@ package org.eamcode.fxguirunanalyzer.service;
 
 import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
 import org.eamcode.fxguirunanalyzer.api.request.Request;
+import org.eamcode.fxguirunanalyzer.util.AlertBox;
 
 public class ReportSceneService {
 
@@ -25,12 +26,9 @@ public class ReportSceneService {
     }
 
     public void deleteAllPhases(Long reportId) {
-        System.out.println("service deleteAllPhases called with reportId: " + reportId);
-        try {
+        AlertBox alertBox = new AlertBox();
+        if (alertBox.confirmDelete("all phases")) {
             request.deleteAllPhases(reportId);
-        } catch (Exception e) {
-            System.err.println("Error deleting phases: " + e.getMessage());
-            throw new RuntimeException(e);
         }
     }
 }

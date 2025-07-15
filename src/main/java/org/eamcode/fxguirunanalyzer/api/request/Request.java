@@ -113,7 +113,6 @@ public class Request {
 
 
     public PhaseResponse createPhase(PhaseRequest phaseRequest) {
-        System.out.println("createPhase in Request called with request: " + phaseRequest);
         String url = getBaseUrl() + "/api/phases";
 
         try {
