@@ -15,6 +15,7 @@ import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
 import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
 import org.eamcode.fxguirunanalyzer.service.ReportSceneService;
 import org.eamcode.fxguirunanalyzer.service.StartSceneService;
+import org.eamcode.fxguirunanalyzer.util.AlertBox;
 import org.eamcode.fxguirunanalyzer.util.Navigation;
 
 import java.io.File;
@@ -98,8 +99,11 @@ public class StartSceneController implements Initializable {
             System.out.println("No report selected for deletion.");
             return;
         }
-        startSceneService.deleteReport(selectedReport.getId());
-        setStartTable(); // Refresh the table after deletion
+        AlertBox alertBox = new AlertBox();
+        if(alertBox.confirmDelete(selectedReport.getName())) {
+            startSceneService.deleteReport(selectedReport.getId());
+            setStartTable(); // Refresh the table after deletion
+        }
     }
 
     @FXML
@@ -125,6 +129,8 @@ public class StartSceneController implements Initializable {
         Navigation nav = new Navigation();
         nav.toReportScene(stage, response);
     }
+
+
 
 
 }
