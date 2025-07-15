@@ -104,6 +104,8 @@ public class ReportSceneController {
         Stage stage = (Stage) addPhaseBtn.getScene().getWindow();
         Navigation nav = new Navigation();
         nav.openPhaseDialog(stage, reportId);
+        ReportResponse updatedResponse = reportSceneService.getSingleReport(reportId);     // or whatever your method is
+        setPhaseTable(updatedResponse);
     }
 
     @FXML
@@ -111,6 +113,8 @@ public class ReportSceneController {
         Stage stage = (Stage) addPhaseBtn.getScene().getWindow();
         Navigation nav = new Navigation();
         nav.openIntervalDialog(stage, reportId);
+        ReportResponse updatedResponse = reportSceneService.getSingleReport(reportId);     // or whatever your method is
+        setPhaseTable(updatedResponse);
     }
 
     @FXML
