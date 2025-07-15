@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import lombok.Data;
 import org.eamcode.fxguirunanalyzer.api.model.PhaseResponse;
 import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
+import org.eamcode.fxguirunanalyzer.service.ReportSceneService;
 import org.eamcode.fxguirunanalyzer.util.Navigation;
 
 import java.io.IOException;
@@ -52,6 +53,9 @@ public class ReportSceneController {
     public Button addIntervalBtn;
 
     @FXML
+    public Button deletePhasesBtn;
+
+    @FXML
     private TableColumn<PhaseResponse, Number> nrCol;
 
     @FXML
@@ -73,13 +77,18 @@ public class ReportSceneController {
     public TableView<PhaseResponse> phaseTable;
 
     private Long reportId;
+    private final ReportSceneService reportSceneService;
+//    private ReportResponse reportResponse;
 
-
+    public ReportSceneController() {
+        this.reportSceneService = new ReportSceneService();
+    }
 
     public void initData(ReportResponse response) {
         setMetaData(response);
         setPhaseTable(response);
         setReportId(response.getId());
+//        this.reportResponse = response;
 
     }
 
@@ -104,6 +113,13 @@ public class ReportSceneController {
         nav.openIntervalDialog(stage, reportId);
     }
 
+    @FXML
+    public void deleteAllPhases(ActionEvent event) {
+        reportSceneService.deleteAllPhases(reportId);
+        ReportResponse updatedResponse = reportSceneService.getSingleReport(reportId);     // or whatever your method is
+        setPhaseTable(updatedResponse);
+    }
+
     private void setMetaData(ReportResponse response) {
         labelName.setText(response.getName());
         tfDuration.setText(String.valueOf(response.getMetaData().getDuration()));
@@ -113,13 +129,7 @@ public class ReportSceneController {
     }
 
     private void setPhaseTable(ReportResponse response) {
-//        nrCol.setCellFactory(col -> new TableCell<>() {
-//            @Override
-//            protected void updateItem(Number item, boolean empty) {
-//                super.updateItem(item, empty);
-//                setText(empty ? null : Integer.toString(getIndex() + 1));
-//            }
-//        });
+
         nrCol.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleIntegerProperty(
                         phaseTable.getItems().indexOf(cellData.getValue()) + 1

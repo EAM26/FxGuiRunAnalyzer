@@ -213,4 +213,24 @@ public class Request {
             throw new RuntimeException(e);
         }
     }
+
+    public void deleteAllPhases(Long reportId) {
+        System.out.println("request deleteAllPhases called with reportId: " + reportId);
+        String url = getBaseUrl() + "/api/phases/" + reportId;
+
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .DELETE()
+                .build();
+
+        try {
+            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() != 204) {
+                throw new IllegalStateException("status " + response.statusCode());
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

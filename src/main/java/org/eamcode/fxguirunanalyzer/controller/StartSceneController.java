@@ -15,7 +15,6 @@ import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
 import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
 import org.eamcode.fxguirunanalyzer.service.ReportSceneService;
 import org.eamcode.fxguirunanalyzer.service.StartSceneService;
-import org.eamcode.fxguirunanalyzer.util.AlertBox;
 import org.eamcode.fxguirunanalyzer.util.Navigation;
 
 import java.io.File;
@@ -64,7 +63,7 @@ public class StartSceneController implements Initializable {
         setStartTable();
     }
 
-    public void setStartTable(){
+    public void setStartTable() {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         durationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
         distanceCol.setCellValueFactory(new PropertyValueFactory<>("distance"));
@@ -95,15 +94,13 @@ public class StartSceneController implements Initializable {
     @FXML
     public void onBtnDeleteClick(ActionEvent event) {
         ReportSummaryResponse selectedReport = startSceneTable.getSelectionModel().getSelectedItem();
-        if (selectedReport == null) {
-            System.out.println("No report selected for deletion.");
-            return;
-        }
-        AlertBox alertBox = new AlertBox();
-        if(alertBox.confirmDelete(selectedReport.getName())) {
-            startSceneService.deleteReport(selectedReport.getId());
+        if (selectedReport != null) {
+            startSceneService.deleteReport(selectedReport);
             setStartTable(); // Refresh the table after deletion
         }
+        System.out.println("No report selected for deletion.");
+
+
     }
 
     @FXML
@@ -111,7 +108,7 @@ public class StartSceneController implements Initializable {
         FileChooser fileChooser = new FileChooser();
 
         File backendDir = new File(System.getProperty("backend.dir", "C:\\Users\\Gebruiker\\Projects\\JavaProjects\\RunAnalyzer\\src\\main\\resources\\test-data"));
-        if(backendDir.exists()){
+        if (backendDir.exists()) {
             fileChooser.setInitialDirectory(backendDir);
         }
 
@@ -119,7 +116,7 @@ public class StartSceneController implements Initializable {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files", "*.CSV", "*.csv"));
 
         File file = fileChooser.showOpenDialog(btnNew.getScene().getWindow());
-        if(file == null) {
+        if (file == null) {
             return;
         }
         String absPath = file.getAbsolutePath();
@@ -129,8 +126,6 @@ public class StartSceneController implements Initializable {
         Navigation nav = new Navigation();
         nav.toReportScene(stage, response);
     }
-
-
 
 
 }

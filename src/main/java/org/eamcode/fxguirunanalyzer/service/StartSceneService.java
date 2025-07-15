@@ -2,6 +2,7 @@ package org.eamcode.fxguirunanalyzer.service;
 
 import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
 import org.eamcode.fxguirunanalyzer.api.request.Request;
+import org.eamcode.fxguirunanalyzer.util.AlertBox;
 import org.eamcode.fxguirunanalyzer.util.Sorter;
 
 import java.io.IOException;
@@ -23,7 +24,11 @@ public class StartSceneService {
             return responses;
     }
 
-    public void deleteReport(Long id) {
-        request.deleteReport(id);
+    public void deleteReport(ReportSummaryResponse selectedReport) {
+        AlertBox alertBox = new AlertBox();
+        if(alertBox.confirmDelete(selectedReport.getName())) {
+            request.deleteReport(selectedReport.getId());
+        }
+
     }
 }
