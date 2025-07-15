@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<DialogPane prefHeight="204.0" prefWidth="332.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eamcode.fxguirunanalyzer.controller.PhaseDialogController">
+   <content>
+      <AnchorPane prefHeight="208.0" prefWidth="332.0">
+         <children>
+            <ComboBox fx:id="categoryCombo" layoutX="37.0" layoutY="123.0" prefHeight="25.0" prefWidth="200.0" />
+            <Spinner fx:id="hourSpinner" layoutX="37.0" layoutY="79.0" prefHeight="25.0" prefWidth="60.0" />
+            <Spinner fx:id="minuteSpinner" layoutX="107.0" layoutY="79.0" prefHeight="25.0" prefWidth="60.0" />
+            <Spinner fx:id="secondSpinner" layoutX="177.0" layoutY="79.0" prefHeight="25.0" prefWidth="60.0" />
+            <Label layoutX="37.0" layoutY="55.0" text="hr" />
+            <Label layoutX="107.0" layoutY="55.0" text="min" />
+            <Label layoutX="177.0" layoutY="55.0" text="sec" />
+         </children>
+      </AnchorPane>
+   </content>
+   <buttonTypes>
+      <ButtonType buttonData="OK_DONE" text="Save" />
+      <ButtonType buttonData="CANCEL_CLOSE" text="Cancel" />
+   </buttonTypes>
+</DialogPane>

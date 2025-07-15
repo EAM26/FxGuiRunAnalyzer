@@ -28,17 +28,20 @@ public class StartSceneController implements Initializable {
     private final StartSceneService startSceneService;
     private final ReportSceneService reportSceneService;
 
-
     public StartSceneController() {
         this.startSceneService = new StartSceneService();
         this.reportSceneService = new ReportSceneService();
     }
+
 
     @FXML
     public TableView<ReportSummaryResponse> startSceneTable;
 
     @FXML
     private Button btnOpen;
+
+    @FXML
+    public Button btnDelete;
 
     @FXML
     public Button btnNew;
@@ -60,7 +63,7 @@ public class StartSceneController implements Initializable {
         setStartTable();
     }
 
-    public void setStartTable(){
+    public void setStartTable() {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         durationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
         distanceCol.setCellValueFactory(new PropertyValueFactory<>("distance"));
@@ -89,11 +92,23 @@ public class StartSceneController implements Initializable {
     }
 
     @FXML
+    public void onBtnDeleteClick(ActionEvent event) {
+        ReportSummaryResponse selectedReport = startSceneTable.getSelectionModel().getSelectedItem();
+        if (selectedReport != null) {
+            startSceneService.deleteReport(selectedReport);
+            setStartTable(); // Refresh the table after deletion
+        }
+        System.out.println("No report selected for deletion.");
+
+
+    }
+
+    @FXML
     public void onButtonNewClick(ActionEvent actionEvent) throws IOException {
         FileChooser fileChooser = new FileChooser();
 
         File backendDir = new File(System.getProperty("backend.dir", "C:\\Users\\Gebruiker\\Projects\\JavaProjects\\RunAnalyzer\\src\\main\\resources\\test-data"));
-        if(backendDir.exists()){
+        if (backendDir.exists()) {
             fileChooser.setInitialDirectory(backendDir);
         }
 
@@ -101,7 +116,7 @@ public class StartSceneController implements Initializable {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files", "*.CSV", "*.csv"));
 
         File file = fileChooser.showOpenDialog(btnNew.getScene().getWindow());
-        if(file == null) {
+        if (file == null) {
             return;
         }
         String absPath = file.getAbsolutePath();
@@ -111,5 +126,6 @@ public class StartSceneController implements Initializable {
         Navigation nav = new Navigation();
         nav.toReportScene(stage, response);
     }
+
 
 }

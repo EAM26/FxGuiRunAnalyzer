@@ -23,5 +23,6 @@
       </TableView>
       <Button fx:id="btnOpen" layoutX="149.0" layoutY="376.0" mnemonicParsing="false" onAction="#onButtonOpenClick" text="Open" />
       <Button fx:id="btnNew" layoutX="286.0" layoutY="376.0" mnemonicParsing="false" onAction="#onButtonNewClick" text="New+" />
+      <Button fx:id="btnDelete" layoutX="402.0" layoutY="376.0" mnemonicParsing="false" onAction="#onBtnDeleteClick" text="Delete" />
    </children>
 </AnchorPane>

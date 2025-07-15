@@ -15,7 +15,7 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Button fx:id="btnStart" layoutX="526.0" layoutY="20.0" mnemonicParsing="false" onAction="#onBtnStartClick" prefHeight="25.0" prefWidth="55.0" text="Back" />
+      <Button fx:id="btnStart" layoutX="698.0" layoutY="20.0" mnemonicParsing="false" onAction="#onBtnBackClick" prefHeight="25.0" prefWidth="55.0" text="Back" />
       <TextField fx:id="tfDuration" layoutX="38.0" layoutY="96.0" prefHeight="25.0" prefWidth="69.0" />
       <Label layoutX="38.0" layoutY="74.0" text="Duration" />
       <Label layoutX="183.0" layoutY="74.0" />
@@ -25,7 +25,7 @@
       <Label layoutX="216.0" layoutY="74.0" text="Heartrate" />
       <TextField fx:id="tfSpeed" layoutX="300.0" layoutY="96.0" prefHeight="25.0" prefWidth="50.0" />
       <Label layoutX="299.0" layoutY="74.0" text="Speed km/h" />
-      <TableView fx:id="phaseTable" layoutX="48.0" layoutY="174.0" prefHeight="200.0" prefWidth="385.0">
+      <TableView fx:id="phaseTable" layoutX="38.0" layoutY="174.0" prefHeight="200.0" prefWidth="385.0">
         <columns>
           <TableColumn fx:id="nrCol" prefWidth="32.6666259765625" text="nr." />
           <TableColumn fx:id="categoryCol" prefWidth="88.0" text="type" />
@@ -36,12 +36,15 @@
         </columns>
       </TableView>
       <Label fx:id="tableName1" layoutX="165.0" layoutY="139.0" text="Phases" />
-      <TableView layoutX="511.0" layoutY="174.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView layoutX="554.0" layoutY="174.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn prefWidth="66.0" text="type" />
           <TableColumn prefWidth="84.66668701171875" text="C2" />
         </columns>
       </TableView>
       <Label fx:id="tableName2" layoutX="441.0" layoutY="139.0" text="Summary" />
+      <Button fx:id="addPhaseBtn" layoutX="441.0" layoutY="231.0" mnemonicParsing="false" onAction="#openPhaseDialog" prefHeight="25.0" prefWidth="90.0" text="add Phase" />
+      <Button fx:id="addIntervalBtn" layoutX="441.0" layoutY="274.0" mnemonicParsing="false" onAction="#openIntervalDialog" prefHeight="25.0" prefWidth="90.0" text="addInterval" />
+      <Button fx:id="deletePhasesBtn" layoutX="441.0" layoutY="318.0" mnemonicParsing="false" onAction="#deleteAllPhases" prefHeight="25.0" prefWidth="90.0" text="delete Phases" />
    </children>
 </AnchorPane>
