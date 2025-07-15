@@ -1,6 +1,5 @@
 package org.eamcode.fxguirunanalyzer.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.eamcode.fxguirunanalyzer.api.model.ReportSummaryResponse;
 import org.eamcode.fxguirunanalyzer.api.request.Request;
 import org.eamcode.fxguirunanalyzer.util.Sorter;
@@ -22,5 +21,9 @@ public class StartSceneService {
             List<ReportSummaryResponse> responses = request.getAllSummaryReports();
             sorter.sortLastFirst(responses);
             return responses;
+    }
+
+    public void deleteReport(Long id) {
+        request.deleteReport(id);
     }
 }

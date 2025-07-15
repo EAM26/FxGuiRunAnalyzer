@@ -28,17 +28,20 @@ public class StartSceneController implements Initializable {
     private final StartSceneService startSceneService;
     private final ReportSceneService reportSceneService;
 
-
     public StartSceneController() {
         this.startSceneService = new StartSceneService();
         this.reportSceneService = new ReportSceneService();
     }
+
 
     @FXML
     public TableView<ReportSummaryResponse> startSceneTable;
 
     @FXML
     private Button btnOpen;
+
+    @FXML
+    public Button btnDelete;
 
     @FXML
     public Button btnNew;
@@ -89,6 +92,17 @@ public class StartSceneController implements Initializable {
     }
 
     @FXML
+    public void onBtnDeleteClick(ActionEvent event) {
+        ReportSummaryResponse selectedReport = startSceneTable.getSelectionModel().getSelectedItem();
+        if (selectedReport == null) {
+            System.out.println("No report selected for deletion.");
+            return;
+        }
+        startSceneService.deleteReport(selectedReport.getId());
+        setStartTable(); // Refresh the table after deletion
+    }
+
+    @FXML
     public void onButtonNewClick(ActionEvent actionEvent) throws IOException {
         FileChooser fileChooser = new FileChooser();
 
@@ -111,5 +125,6 @@ public class StartSceneController implements Initializable {
         Navigation nav = new Navigation();
         nav.toReportScene(stage, response);
     }
+
 
 }
