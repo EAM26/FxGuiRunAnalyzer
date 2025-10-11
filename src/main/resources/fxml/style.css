@@ -1,0 +1,10 @@
+.table-column#speedCol,
+.table-column#hrCol,
+.table-column#durationCol{
+    -fx-alignment: CENTER;
+}
+
+.table-column#distanceCol {
+    -fx-alignment: CENTER-RIGHT;
+}
+

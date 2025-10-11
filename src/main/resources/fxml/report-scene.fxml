@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eamcode.fxguirunanalyzer.controller.ReportSceneController">
+<AnchorPane prefHeight="400.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eamcode.fxguirunanalyzer.controller.ReportSceneController" stylesheets="@style.css">
    <children>
       <Label fx:id="lblTraining" layoutX="38.0" layoutY="24.0" prefHeight="17.0" prefWidth="55.0" text="Training:" />
       <Label fx:id="labelName" layoutX="88.0" layoutY="23.0" text="label name training">

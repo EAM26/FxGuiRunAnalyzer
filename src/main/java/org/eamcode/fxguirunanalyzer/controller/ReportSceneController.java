@@ -1,5 +1,6 @@
 package org.eamcode.fxguirunanalyzer.controller;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,12 +10,15 @@ import lombok.Data;
 import org.eamcode.fxguirunanalyzer.api.model.PhaseResponse;
 import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
 import org.eamcode.fxguirunanalyzer.service.ReportSceneService;
+import org.eamcode.fxguirunanalyzer.util.MyTimeFormatter;
 import org.eamcode.fxguirunanalyzer.util.Navigation;
 
 import java.io.IOException;
 
 @Data
 public class ReportSceneController {
+
+    MyTimeFormatter timeFormatter = new MyTimeFormatter();
 
     @FXML
     public Label labelReportId;
@@ -140,10 +144,18 @@ public class ReportSceneController {
                 )
         );
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
-        durationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
-        distanceCol.setCellValueFactory(new PropertyValueFactory<>("distance"));
-        hrCol.setCellValueFactory(new PropertyValueFactory<>("heartRateAvg"));
-        speedCol.setCellValueFactory(new PropertyValueFactory<>("speed"));
+        durationCol.setCellValueFactory(dur -> new SimpleStringProperty(timeFormatter.formatDuration(dur.getValue().getDuration())));
+        distanceCol.setCellValueFactory(cd ->
+                new SimpleStringProperty(String.format("%.0f", cd.getValue().getDistance()))
+        );
+
+        hrCol.setCellValueFactory(cd ->
+                new SimpleStringProperty(String.format("%.0f", cd.getValue().getHeartRateAvg()))
+        );
+
+        speedCol.setCellValueFactory(cd ->
+                new SimpleStringProperty(String.format("%.2f", cd.getValue().getSpeed()))
+        );
 
         if (response.getPhaseResponses() != null) {
             phaseTable.setItems(javafx.collections.FXCollections.observableList(response.getPhaseResponses()));
