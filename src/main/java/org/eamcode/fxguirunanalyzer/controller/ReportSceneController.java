@@ -137,7 +137,8 @@ public class ReportSceneController {
     }
 
     private void setPhaseTable(ReportResponse response) {
-
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        System.out.println("summaries are: "+response.getSummaries());
         nrCol.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleIntegerProperty(
                         phaseTable.getItems().indexOf(cellData.getValue()) + 1
