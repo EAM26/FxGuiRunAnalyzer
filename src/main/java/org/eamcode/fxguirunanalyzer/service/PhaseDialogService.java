@@ -22,7 +22,7 @@ public class PhaseDialogService {
         phaseRequest.setReportId(reportId);
         MyTimeFormatter formatter = new MyTimeFormatter();
         phaseRequest.setDuration(formatter.formatDuration(hr, min, sec));
-        System.out.println(category);
+//        System.out.println(category);
         phaseRequest.setCategory(PhaseCategory.valueOf(category));
         request.createPhase(phaseRequest);
     }

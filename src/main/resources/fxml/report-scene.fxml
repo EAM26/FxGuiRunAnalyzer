@@ -25,21 +25,22 @@
       <Label layoutX="216.0" layoutY="74.0" text="Heartrate" />
       <TextField fx:id="tfSpeed" layoutX="300.0" layoutY="96.0" prefHeight="25.0" prefWidth="50.0" />
       <Label layoutX="299.0" layoutY="74.0" text="Speed km/h" />
-      <TableView fx:id="phaseTable" layoutX="38.0" layoutY="174.0" prefHeight="350.0" prefWidth="375.0">
+      <TableView fx:id="phasesTable" layoutX="38.0" layoutY="174.0" prefHeight="350.0" prefWidth="375.0">
         <columns>
-          <TableColumn fx:id="nrCol" prefWidth="30.0" text="nr." />
-          <TableColumn fx:id="categoryCol" prefWidth="90.0" text="type" />
-            <TableColumn fx:id="durationCol" prefWidth="65.0" text="duration" />
-            <TableColumn fx:id="distanceCol" prefWidth="70.0" text="distance" />
-            <TableColumn fx:id="hrCol" prefWidth="60.0" text="hr" />
-            <TableColumn fx:id="speedCol" prefWidth="60.0" text="speed" />
+          <TableColumn fx:id="phasesNrCol" prefWidth="30.0" text="nr." />
+          <TableColumn fx:id="phasesCategoryCol" prefWidth="90.0" text="type" />
+            <TableColumn fx:id="phasesDurationCol" prefWidth="65.0" text="duration" />
+            <TableColumn fx:id="phasesDistanceCol" prefWidth="70.0" text="distance" />
+            <TableColumn fx:id="phasesHrCol" prefWidth="60.0" text="hr" />
+            <TableColumn fx:id="phasesSpeedCol" prefWidth="60.0" text="speed" />
         </columns>
       </TableView>
       <Label fx:id="tableName1" layoutX="165.0" layoutY="139.0" text="Phases" />
-      <TableView layoutX="554.0" layoutY="174.0" prefHeight="350.0" prefWidth="345.0">
+      <TableView fx:id="summaryTable" layoutX="554.0" layoutY="174.0" prefHeight="350.0" prefWidth="345.0">
         <columns>
-          <TableColumn prefWidth="90.0" text="type" />
-          <TableColumn prefWidth="65.0" text="duration" />
+          <TableColumn fx:id="summaryCategoryCol" prefWidth="90.0" text="type" />
+<!--          <TableColumn prefWidth="65.0" text="duration" />-->
+          <TableColumn fx:id="summaryDurationCol" prefWidth="65.0" text="duration" />
             <TableColumn prefWidth="70.0" text="distance" />
             <TableColumn prefWidth="60.0" text="hr" />
             <TableColumn prefWidth="60.0" text="speed" />

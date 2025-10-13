@@ -1,5 +1,6 @@
 package org.eamcode.fxguirunanalyzer.controller;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.Data;
+import org.eamcode.fxguirunanalyzer.api.model.PhaseGroupSummary;
 import org.eamcode.fxguirunanalyzer.api.model.PhaseResponse;
 import org.eamcode.fxguirunanalyzer.api.model.ReportResponse;
 import org.eamcode.fxguirunanalyzer.service.ReportSceneService;
@@ -14,6 +16,8 @@ import org.eamcode.fxguirunanalyzer.util.MyTimeFormatter;
 import org.eamcode.fxguirunanalyzer.util.Navigation;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.util.List;
 
 @Data
 public class ReportSceneController {
@@ -59,26 +63,43 @@ public class ReportSceneController {
     @FXML
     public Button deletePhasesBtn;
 
+    // Phase table
     @FXML
-    private TableColumn<PhaseResponse, Number> nrCol;
+    private TableColumn<PhaseResponse, Number> phasesNrCol;
 
     @FXML
-    public TableColumn<PhaseResponse, String> durationCol;
+    public TableColumn<PhaseResponse, String> phasesDurationCol;
 
     @FXML
-    public TableColumn<PhaseResponse, String> distanceCol;
+    public TableColumn<PhaseResponse, String> phasesDistanceCol;
 
     @FXML
-    public TableColumn<PhaseResponse, String> hrCol;
+    public TableColumn<PhaseResponse, String> phasesHrCol;
 
     @FXML
-    public TableColumn<PhaseResponse, String> speedCol;
+    public TableColumn<PhaseResponse, String> phasesSpeedCol;
 
     @FXML
-    public TableColumn<PhaseResponse, String> categoryCol;
+    public TableColumn<PhaseResponse, String> phasesCategoryCol;
 
     @FXML
-    public TableView<PhaseResponse> phaseTable;
+    public TableView<PhaseResponse> phasesTable;
+
+    // Summary table
+
+    @FXML
+    public TableView<PhaseGroupSummary> summaryTable;
+
+    @FXML
+    public TableColumn<PhaseGroupSummary, String> summaryCategoryCol;
+    @FXML
+    public TableColumn<PhaseGroupSummary, Duration> summaryDurationCol;
+    @FXML
+    public TableColumn<PhaseGroupSummary, String> summaryDistanceCol;
+    @FXML
+    public TableColumn<PhaseGroupSummary, String> summaryHrCol;
+    @FXML
+    public TableColumn<PhaseGroupSummary, String> summarySpeedCol;
 
     private Long reportId;
     private final ReportSceneService reportSceneService;
@@ -90,11 +111,14 @@ public class ReportSceneController {
 
     public void initData(ReportResponse response) {
         setMetaData(response);
-        setPhaseTable(response);
+        setPhasesTable(response);
         setReportId(response.getId());
+        setSummaryTable(response);
 //        this.reportResponse = response;
 
     }
+
+
 
     @FXML
     private void onBtnBackClick(ActionEvent event) throws IOException {
@@ -108,8 +132,8 @@ public class ReportSceneController {
         Stage stage = (Stage) addPhaseBtn.getScene().getWindow();
         Navigation nav = new Navigation();
         nav.openPhaseDialog(stage, reportId);
-        ReportResponse updatedResponse = reportSceneService.getSingleReport(reportId);     // or whatever your method is
-        setPhaseTable(updatedResponse);
+        ReportResponse updatedResponse = reportSceneService.getSingleReport(reportId);
+        setPhasesTable(updatedResponse);
     }
 
     @FXML
@@ -117,15 +141,15 @@ public class ReportSceneController {
         Stage stage = (Stage) addPhaseBtn.getScene().getWindow();
         Navigation nav = new Navigation();
         nav.openIntervalDialog(stage, reportId);
-        ReportResponse updatedResponse = reportSceneService.getSingleReport(reportId);     // or whatever your method is
-        setPhaseTable(updatedResponse);
+        ReportResponse updatedResponse = reportSceneService.getSingleReport(reportId);
+        setPhasesTable(updatedResponse);
     }
 
     @FXML
     public void deleteAllPhases(ActionEvent event) {
         reportSceneService.deleteAllPhases(reportId);
-        ReportResponse updatedResponse = reportSceneService.getSingleReport(reportId);     // or whatever your method is
-        setPhaseTable(updatedResponse);
+        ReportResponse updatedResponse = reportSceneService.getSingleReport(reportId);
+        setPhasesTable(updatedResponse);
     }
 
     private void setMetaData(ReportResponse response) {
@@ -136,30 +160,45 @@ public class ReportSceneController {
         tfSpeed.setText(response.getMetaData().getSpeedAvg());
     }
 
-    private void setPhaseTable(ReportResponse response) {
+    private void setSummaryTable(ReportResponse response) {
         System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         System.out.println("summaries are: "+response.getSummaries());
-        nrCol.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleIntegerProperty(
-                        phaseTable.getItems().indexOf(cellData.getValue()) + 1
+        summaryCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+//        summaryDurationCol.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue().getTotalDuration().toString()));
+
+
+
+
+        if (response.getSummaries() != null) {
+            List<PhaseGroupSummary> filteredSummaries = response.getSummaries().stream().filter(s ->
+                    !s.getTotalDuration().isZero()).toList();
+            summaryTable.setItems(javafx.collections.FXCollections.observableList(filteredSummaries));
+        }
+    }
+
+    private void setPhasesTable(ReportResponse response) {
+
+        phasesNrCol.setCellValueFactory(cellData ->
+                new SimpleIntegerProperty(
+                        phasesTable.getItems().indexOf(cellData.getValue()) + 1
                 )
         );
-        categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
-        durationCol.setCellValueFactory(dur -> new SimpleStringProperty(timeFormatter.formatDuration(dur.getValue().getDuration())));
-        distanceCol.setCellValueFactory(cd ->
+        phasesCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        phasesDurationCol.setCellValueFactory(dur -> new SimpleStringProperty(timeFormatter.formatDuration(dur.getValue().getDuration())));
+        phasesDistanceCol.setCellValueFactory(cd ->
                 new SimpleStringProperty(String.format("%.0f", cd.getValue().getDistance()))
         );
 
-        hrCol.setCellValueFactory(cd ->
+        phasesHrCol.setCellValueFactory(cd ->
                 new SimpleStringProperty(String.format("%.0f", cd.getValue().getHeartRateAvg()))
         );
 
-        speedCol.setCellValueFactory(cd ->
+        phasesSpeedCol.setCellValueFactory(cd ->
                 new SimpleStringProperty(String.format("%.2f", cd.getValue().getSpeed()))
         );
 
         if (response.getPhaseResponses() != null) {
-            phaseTable.setItems(javafx.collections.FXCollections.observableList(response.getPhaseResponses()));
+            phasesTable.setItems(javafx.collections.FXCollections.observableList(response.getPhaseResponses()));
         }
     }
 
