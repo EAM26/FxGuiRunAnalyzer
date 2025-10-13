@@ -77,6 +77,9 @@ public class ReportSceneController {
     public TableColumn<PhaseResponse, String> phasesHrCol;
 
     @FXML
+    public TableColumn<PhaseResponse, String> phasesCadenceCol;
+
+    @FXML
     public TableColumn<PhaseResponse, String> phasesSpeedCol;
 
     @FXML
@@ -99,11 +102,12 @@ public class ReportSceneController {
     @FXML
     public TableColumn<PhaseGroupSummary, String> summaryHrCol;
     @FXML
+    public TableColumn<PhaseGroupSummary, String> summaryCadenceCol;
+    @FXML
     public TableColumn<PhaseGroupSummary, String> summarySpeedCol;
 
     private Long reportId;
     private final ReportSceneService reportSceneService;
-//    private ReportResponse reportResponse;
 
     public ReportSceneController() {
         this.reportSceneService = new ReportSceneService();
@@ -172,6 +176,9 @@ public class ReportSceneController {
         summaryHrCol.setCellValueFactory(cd ->
                 new SimpleStringProperty(String.format("%.0f", cd.getValue().getAverageHeartRate())));
 
+        summaryCadenceCol.setCellValueFactory(cd ->
+                new SimpleStringProperty(String.format("%.0f", cd.getValue().getAverageCadence())));
+
         summarySpeedCol.setCellValueFactory(cd ->
                 new SimpleStringProperty(String.format("%.2f", cd.getValue().getAverageSpeed())));
 
@@ -200,6 +207,10 @@ public class ReportSceneController {
 
         phasesHrCol.setCellValueFactory(cd ->
                 new SimpleStringProperty(String.format("%.0f", cd.getValue().getHeartRateAvg()))
+        );
+
+        phasesCadenceCol.setCellValueFactory(cd ->
+                new SimpleStringProperty(String.format("%.0f", cd.getValue().getCadenceAvg()))
         );
 
         phasesSpeedCol.setCellValueFactory(cd ->
