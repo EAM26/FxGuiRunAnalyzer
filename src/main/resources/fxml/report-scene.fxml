@@ -39,11 +39,10 @@
       <TableView fx:id="summaryTable" layoutX="554.0" layoutY="174.0" prefHeight="350.0" prefWidth="345.0">
         <columns>
           <TableColumn fx:id="summaryCategoryCol" prefWidth="90.0" text="type" />
-<!--          <TableColumn prefWidth="65.0" text="duration" />-->
           <TableColumn fx:id="summaryDurationCol" prefWidth="65.0" text="duration" />
-            <TableColumn prefWidth="70.0" text="distance" />
-            <TableColumn prefWidth="60.0" text="hr" />
-            <TableColumn prefWidth="60.0" text="speed" />
+            <TableColumn fx:id="summaryDistanceCol" prefWidth="70.0" text="distance" />
+            <TableColumn fx:id="summaryHrCol" prefWidth="60.0" text="hr" />
+            <TableColumn fx:id="summarySpeedCol" prefWidth="60.0" text="speed" />
         </columns>
       </TableView>
       <Label fx:id="tableName2" layoutX="554.0" layoutY="139.0" text="Summary" />

@@ -93,7 +93,7 @@ public class ReportSceneController {
     @FXML
     public TableColumn<PhaseGroupSummary, String> summaryCategoryCol;
     @FXML
-    public TableColumn<PhaseGroupSummary, Duration> summaryDurationCol;
+    public TableColumn<PhaseGroupSummary, String> summaryDurationCol;
     @FXML
     public TableColumn<PhaseGroupSummary, String> summaryDistanceCol;
     @FXML
@@ -111,10 +111,8 @@ public class ReportSceneController {
 
     public void initData(ReportResponse response) {
         setMetaData(response);
-        setPhasesTable(response);
         setReportId(response.getId());
-        setSummaryTable(response);
-//        this.reportResponse = response;
+        refreshTables(response);
 
     }
 
@@ -133,7 +131,7 @@ public class ReportSceneController {
         Navigation nav = new Navigation();
         nav.openPhaseDialog(stage, reportId);
         ReportResponse updatedResponse = reportSceneService.getSingleReport(reportId);
-        setPhasesTable(updatedResponse);
+        refreshTables(updatedResponse);
     }
 
     @FXML
@@ -142,14 +140,14 @@ public class ReportSceneController {
         Navigation nav = new Navigation();
         nav.openIntervalDialog(stage, reportId);
         ReportResponse updatedResponse = reportSceneService.getSingleReport(reportId);
-        setPhasesTable(updatedResponse);
+        refreshTables(updatedResponse);
     }
 
     @FXML
     public void deleteAllPhases(ActionEvent event) {
         reportSceneService.deleteAllPhases(reportId);
         ReportResponse updatedResponse = reportSceneService.getSingleReport(reportId);
-        setPhasesTable(updatedResponse);
+        refreshTables(updatedResponse);
     }
 
     private void setMetaData(ReportResponse response) {
@@ -164,8 +162,18 @@ public class ReportSceneController {
         System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         System.out.println("summaries are: "+response.getSummaries());
         summaryCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
-//        summaryDurationCol.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue().getTotalDuration().toString()));
 
+        summaryDurationCol.setCellValueFactory(cd ->
+                new SimpleStringProperty(timeFormatter.formatDuration(cd.getValue().getTotalDuration())));
+
+        summaryDistanceCol.setCellValueFactory(cd ->
+                new SimpleStringProperty(String.format("%.0f", cd.getValue().getTotalDistance())));
+
+        summaryHrCol.setCellValueFactory(cd ->
+                new SimpleStringProperty(String.format("%.0f", cd.getValue().getAverageHeartRate())));
+
+        summarySpeedCol.setCellValueFactory(cd ->
+                new SimpleStringProperty(String.format("%.2f", cd.getValue().getAverageSpeed())));
 
 
 
@@ -184,7 +192,8 @@ public class ReportSceneController {
                 )
         );
         phasesCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
-        phasesDurationCol.setCellValueFactory(dur -> new SimpleStringProperty(timeFormatter.formatDuration(dur.getValue().getDuration())));
+        phasesDurationCol.setCellValueFactory(dur ->
+                new SimpleStringProperty(timeFormatter.formatDuration(dur.getValue().getDuration())));
         phasesDistanceCol.setCellValueFactory(cd ->
                 new SimpleStringProperty(String.format("%.0f", cd.getValue().getDistance()))
         );
@@ -200,6 +209,11 @@ public class ReportSceneController {
         if (response.getPhaseResponses() != null) {
             phasesTable.setItems(javafx.collections.FXCollections.observableList(response.getPhaseResponses()));
         }
+    }
+
+    private void refreshTables(ReportResponse updateResponse) {
+        setPhasesTable(updateResponse);
+        setSummaryTable(updateResponse);
     }
 
 }
