@@ -19,4 +19,5 @@ public class MetaData {
     String totalDistance;
     String heartRateAvg;
     String speedAvg;
+    String cadenceAvg;
 }

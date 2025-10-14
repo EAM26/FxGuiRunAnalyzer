@@ -22,4 +22,5 @@ public class PhaseResponse {
     private Double speed;
     private Duration duration;
     private double heartRateAvg;
+    private double cadenceAvg;
 }
