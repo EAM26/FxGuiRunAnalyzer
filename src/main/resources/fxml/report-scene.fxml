@@ -15,7 +15,7 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Button fx:id="btnStart" layoutX="843.0" layoutY="96.0" mnemonicParsing="false" onAction="#onBtnBackClick" prefHeight="25.0" prefWidth="55.0" text="Back" />
+      <Button fx:id="btnStart" layoutX="1024.0" layoutY="78.0" mnemonicParsing="false" onAction="#onBtnBackClick" prefHeight="25.0" prefWidth="55.0" text="Back" />
       <TextField fx:id="tfDuration" layoutX="38.0" layoutY="96.0" prefHeight="25.0" prefWidth="69.0" />
       <Label layoutX="38.0" layoutY="74.0" text="Duration" />
       <Label layoutX="183.0" layoutY="74.0" />
@@ -25,18 +25,18 @@
       <Label layoutX="216.0" layoutY="74.0" text="Heartrate" />
       <TextField fx:id="tfSpeed" layoutX="300.0" layoutY="96.0" prefHeight="25.0" prefWidth="50.0" />
       <Label layoutX="299.0" layoutY="74.0" text="Speed km/h" />
-      <TableView fx:id="phasesTable" layoutX="38.0" layoutY="174.0" prefHeight="350.0" prefWidth="477.0">
+      <TableView fx:id="phasesTable" layoutX="38.0" layoutY="174.0" prefHeight="350.0" prefWidth="435.0">
         <columns>
           <TableColumn fx:id="phasesNrCol" prefWidth="30.0" text="nr." />
           <TableColumn fx:id="phasesCategoryCol" prefWidth="90.0" text="type" />
             <TableColumn fx:id="phasesDurationCol" prefWidth="65.0" text="duration" />
             <TableColumn fx:id="phasesDistanceCol" prefWidth="70.0" text="distance" />
             <TableColumn fx:id="phasesHrCol" prefWidth="60.0" text="hr" />
-            <TableColumn fx:id="phasesCadenceCol" prefWidth="96.0" text="cadence" />
-            <TableColumn fx:id="phasesSpeedCol" prefWidth="63.0" text="speed" />
+            <TableColumn fx:id="phasesCadenceCol" prefWidth="60.0" text="cadence" />
+            <TableColumn fx:id="phasesSpeedCol" prefWidth="60.0" text="speed" />
         </columns>
       </TableView>
-      <Label fx:id="tableName1" layoutX="165.0" layoutY="139.0" text="Phases" />
+      <Label fx:id="tableName1" layoutX="237.0" layoutY="139.0" text="Phases" />
       <TableView fx:id="summaryTable" layoutX="675.0" layoutY="174.0" prefHeight="350.0" prefWidth="405.0">
         <columns>
           <TableColumn fx:id="summaryCategoryCol" prefWidth="90.0" text="type" />
@@ -47,9 +47,9 @@
             <TableColumn fx:id="summarySpeedCol" prefWidth="60.0" text="speed" />
         </columns>
       </TableView>
-      <Label fx:id="tableName2" layoutX="554.0" layoutY="139.0" text="Summary" />
-      <Button fx:id="addPhaseBtn" layoutX="554.0" layoutY="234.0" mnemonicParsing="false" onAction="#openPhaseDialog" prefHeight="25.0" prefWidth="90.0" text="add Phase" />
-      <Button fx:id="addIntervalBtn" layoutX="554.0" layoutY="275.0" mnemonicParsing="false" onAction="#openIntervalDialog" prefHeight="25.0" prefWidth="90.0" text="addInterval" />
-      <Button fx:id="deletePhasesBtn" layoutX="554.0" layoutY="317.0" mnemonicParsing="false" onAction="#deleteAllPhases" prefHeight="25.0" prefWidth="90.0" text="delete Phases" />
+      <Label fx:id="tableName2" layoutX="853.0" layoutY="139.0" text="Summary" />
+      <Button fx:id="addPhaseBtn" layoutX="534.0" layoutY="233.0" mnemonicParsing="false" onAction="#openPhaseDialog" prefHeight="25.0" prefWidth="90.0" text="add Phase" />
+      <Button fx:id="addIntervalBtn" layoutX="534.0" layoutY="274.0" mnemonicParsing="false" onAction="#openIntervalDialog" prefHeight="25.0" prefWidth="90.0" text="addInterval" />
+      <Button fx:id="deletePhasesBtn" layoutX="534.0" layoutY="315.0" mnemonicParsing="false" onAction="#deleteAllPhases" prefHeight="25.0" prefWidth="90.0" text="delete Phases" />
    </children>
 </AnchorPane>

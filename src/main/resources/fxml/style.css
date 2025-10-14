@@ -1,10 +1,22 @@
-.table-column#speedCol,
-.table-column#hrCol,
-.table-column#durationCol{
+.table-column#phasesCadenceCol,
+.table-column#phasesSpeedCol,
+.table-column#phasesHrCol,
+.table-column#phasesDurationCol,
+.table-column#summaryCadenceCol,
+.table-column#summaryDurationCol,
+.table-column#summaryHrCol,
+.table-column#summarySpeedCol
+{
     -fx-alignment: CENTER;
 }
 
-.table-column#distanceCol {
+/*.table-column#phasesDistanceCol {*/
+/*    -fx-alignment: CENTER-RIGHT;*/
+/*    -fx-padding: 0 20px;*/
+/*}*/
+.table-column#phasesDistanceCol,
+.table-column#summaryDistanceCol {
     -fx-alignment: CENTER-RIGHT;
+    -fx-padding: 0 10px 0 0; /* 8px ruimte aan de rechterkant */
 }
 
